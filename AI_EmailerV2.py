@@ -61,34 +61,34 @@ def main():
 
         #Take User Input and Generate LLM Response
         #st.write(llm_response(CompanyName,DesiredItem,URL_Text))
-        st.write(
+        st.markdown(
             '''
-            Subject: Sponsorship Inquiry
-            
+            ## Subject: Sponsorship Inquiry
+        
             Dear Movella Automation & Mobility | Xsens,
-            
+        
             I represent Global Formula Racing (GFR), a participant in the Formula Student Competition since 2009. We are seeking sponsorship for our competitive vehicle design projects.
-            
-            Overview of GFR:
+        
+            **Overview of GFR:**
             - Global presence in static and dynamic events
             - Emphasis on simplicity, reliability, and practical experience
             - Rich history, including transitioning to electric powertrains and embracing driverless development
-            
-            Sponsorship Benefits:
+        
+            **Sponsorship Benefits:**
             - Visibility on our race car, livery, and website
             - Opportunities for active recruitment and member engagement
             - Contribution to the growth of future engineers
-            
+        
             We are particularly interested in [DesiredItem]. Your support in material, manufacturing, finance, and knowledge would be invaluable.
-            
+        
             For context, here is some information from your website regarding [DesiredItem]:
-            
+        
             [Insert relevant information from the website]
-            
+        
             We believe that a partnership with Movella can mutually benefit both organizations. Please let us know if you are open to discussing this further.
-            
+        
             Thank you for considering our proposal.
-            
+        
             Best regards,
             [Your Name]
             [Your Contact Information]
