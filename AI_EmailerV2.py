@@ -1,9 +1,8 @@
 import requests
-import webbrowser
 from langchain.chat_models import ChatOpenAI
 from bs4 import BeautifulSoup
 import streamlit as st
-import time
+
 
 
 from langchain.schema import (
@@ -73,29 +72,3 @@ def main():
     
 
 main()
-webbrowser.open("http://localhost:8501")
-
-def is_url_reachable(url):
-    try:
-        response = requests.head(url, timeout=5)
-        return True
-    except requests.ConnectionError:
-        return False
-
-while is_url_reachable("http://localhost:8501"):
-    time.sleep(1)
-else:
-    st.stop()
-
-
-
-
-#subprocess.Popen(["streamlit", "run", os.path.abspath(__file__)])
-
-
-
-#streamlit run "c:/Users/johnn/OneDrive/Desktop/Visual Studio Code/AI_EmailerV2.py"
-#https://example.com/
-
-#subprocess.Popen(["streamlit", "run", os.path.abspath(__file__)])
-#webbrowser.open("http://localhost:8501")
