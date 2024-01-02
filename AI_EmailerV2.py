@@ -3,8 +3,6 @@ from langchain.chat_models import ChatOpenAI
 from bs4 import BeautifulSoup
 import streamlit as st
 
-
-
 from langchain.schema import (
     SystemMessage,
     HumanMessage,
@@ -25,9 +23,7 @@ def get_URL_text(URL):
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
             # Extract text
-
             text_content = soup.get_text()
-
             return text_content
         else:
             # If the request was not successful, print an error message
@@ -65,10 +61,6 @@ def main():
         URL_Text = get_URL_text(URL)
 
         #Take User Input and Generate LLM Response
-        #st.write(llm_response(CompanyName,DesiredItem,URL_Text))
-
-        #For Testing purposes
-        st.write("generated text: ")
+        st.write(llm_response(CompanyName,DesiredItem,URL_Text))
     
-
 main()
