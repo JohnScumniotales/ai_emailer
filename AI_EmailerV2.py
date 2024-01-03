@@ -110,6 +110,7 @@ def Main():
                 else:
                     # Generate the email
                     result = llm_response(CompanyName, DesiredItem, URL_Text)
-                    st.write(result)      
+                    st.write(result)    
+                    st.session_state.email_counter += 1
 Main()
 
