@@ -83,7 +83,7 @@ def rerun(error):
 def Main():
     #Streamlit UI Title
     st.title("Sponsor Email Tool")
-    st.write("Total Emails Generated: " + {st.session_state.email_counter})
+    st.text(f"Total Emails Generated: {st.session_state.email_counter}")
     # Collect user Input
     CompanyName = st.text_input("Enter Company Name:")
     DesiredItem = st.text_input("Enter Desired Item:")
