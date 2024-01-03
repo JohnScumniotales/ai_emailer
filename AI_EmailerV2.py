@@ -81,6 +81,7 @@ def rerun(error):
 
 
 def Main():
+    st.image('gfr.png')
     #Streamlit UI Title
     st.title("Sponsor Email Tool")
     st.text(f"Total Emails Generated: {st.session_state.email_counter}")
