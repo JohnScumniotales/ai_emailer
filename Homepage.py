@@ -13,6 +13,8 @@ st.set_page_config(
     page_title="Ai_Emailer"
 )
 
+st.sidebar.success("Select a page above")
+
 global key
 key = "Your Open Ai Key"
 
