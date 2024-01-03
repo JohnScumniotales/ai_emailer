@@ -35,6 +35,10 @@ if 'button_disabled' not in st.session_state:
 if 'button_clicked' not in st.session_state:
     st.session_state.button_clicked = False
 
+# Initialize email_counter in session state
+if 'email_counter' not in st.session_state:
+    st.session_state.email_counter = 0
+
 # Takes URL as a parameter and returns text if possible
 def get_URL_text(URL):
     try:
@@ -79,7 +83,7 @@ def rerun(error):
 def Main():
     #Streamlit UI Title
     st.title("Sponsor Email Tool")
-
+    st.write(st.session_state.email_counter)
     # Collect user Input
     CompanyName = st.text_input("Enter Company Name:")
     DesiredItem = st.text_input("Enter Desired Item:")
