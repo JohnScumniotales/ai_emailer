@@ -37,7 +37,7 @@ if 'button_clicked' not in st.session_state:
 
 # Initialize email_counter in session state
 if 'email_counter' not in st.session_state:
-    st.session_state.email_counter = 0
+    st.session_state.email_counter = 1
 
 # Takes URL as a parameter and returns text if possible
 def get_URL_text(URL):
