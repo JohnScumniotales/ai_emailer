@@ -9,6 +9,11 @@ from langchain.schema import (
     HumanMessage,
 )
 
+st.set_page_config(
+    page_title="Ai_Emailer"
+    page_icon="🤖"
+)
+
 global key
 key = "Your Open Ai Key"
 
