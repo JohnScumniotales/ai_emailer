@@ -86,14 +86,13 @@ def rerun(error):
 def Main():
     st.image('gfr.png')
     #Streamlit UI Title
-    st.title("Sponsor Email Tool")
+    st.title("Sponsor Email Generator")
     st.text(f"Total Emails Generated: {st.session_state.email_counter}")
     
     # Collect user Input
     CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.button_disabled)
     DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.button_disabled)
     URL = st.text_input("Enter URL:",disabled= st.session_state.button_disabled)
-    st.header("Sponsor Email")
     
     #If button hasnt been clicked
     if st.session_state.button_clicked == False:
