@@ -77,7 +77,7 @@ def llm_response(CompanyName, DesiredItem, URL_Text):
 
 # Function takes error message as input, counts-down and restarts site
 def rerun(error):
-    st.warning(error)
+    st.warning(error, icon="⚠️")
     for i in range(5, -1, -1):
         st.text(f"Restarting in {i}")
         time.sleep(1)
