@@ -62,7 +62,6 @@ def get_URL_text(URL):
 
 # Takes URL_Response, CompanyName, DesiredItem as a parameter and returns LLM response
 def llm_response(CompanyName, DesiredItem, URL_Text):
-    time.sleep(10)
     message = (
         SystemMessage(content=(f'''
         You are a program that creates emails to send to companies in order to seek out sponsorships.
@@ -78,8 +77,9 @@ def llm_response(CompanyName, DesiredItem, URL_Text):
 # Function takes error message as input, counts-down and restarts site
 def rerun(error):
     st.warning(error, icon="⚠️")
+    i= None
+    st.text(f"Restarting in {i}")
     for i in range(5, -1, -1):
-        st.text(f"Restarting in {i}")
         time.sleep(1)
     toggle_button_on_click()
     st.rerun()
