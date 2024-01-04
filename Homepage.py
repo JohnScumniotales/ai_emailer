@@ -11,7 +11,6 @@ from langchain.schema import (
 
 st.set_page_config(
     page_title="Ai Emailer Tool",
-    page_icon="🤖" + "✉️",
     layout="wide",
 )
 
@@ -101,7 +100,7 @@ def Main():
     if st.session_state.button_clicked == False:
         #Starts Email Creation & toggles button functionality
         if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
-            with st.status("Generating Email"):
+            with st.status("Generating Email", expanded=True):
                 st.write("Downloading Data")
                 URL_Text = get_URL_text(URL)
                 
