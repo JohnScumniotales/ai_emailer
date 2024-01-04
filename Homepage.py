@@ -13,8 +13,6 @@ st.set_page_config(
     page_title="Ai_Emailer"
 )
 
-st.sidebar.success("Select a page above")
-
 global key
 key = "Your Open Ai Key"
 
@@ -76,7 +74,7 @@ def llm_response(CompanyName, DesiredItem, URL_Text):
     res = chat(message)
     return res.content
 
-# Function Rerun's Streamlit and Resets session_state
+# Function takes error message as input, counts-down and restarts site
 def rerun(error):
     st.warning(error)
     for i in range(5, -1, -1):
@@ -85,12 +83,12 @@ def rerun(error):
     toggle_button_on_click()
     st.rerun()
 
-
 def Main():
     st.image('gfr.png')
     #Streamlit UI Title
     st.title("Sponsor Email Tool")
     st.text(f"Total Emails Generated: {st.session_state.email_counter}")
+    
     # Collect user Input
     CompanyName = st.text_input("Enter Company Name:")
     DesiredItem = st.text_input("Enter Desired Item:")
@@ -99,10 +97,12 @@ def Main():
     
     #If button hasnt been clicked
     if st.session_state.button_clicked == False:
+        #Starts Email Creation & toggles button functionality
         if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
             with st.status("Generating Email"):
                 st.write("Downloading Data")
                 URL_Text = get_URL_text(URL)
+                
                 # Error Handling
                 if len(URL) == 0:
                     rerun("No URL Provided")
