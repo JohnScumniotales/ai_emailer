@@ -10,8 +10,8 @@ from langchain.schema import (
 )
 
 st.set_page_config(
-    page_title="Ai Emailer Tool"
-    page_icon="✉️",
+    page_title="Ai Emailer Tool",
+    page_icon="🤖" + "✉️",
     layout="wide",
 )
 
