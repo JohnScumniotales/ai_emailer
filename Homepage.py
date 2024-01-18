@@ -115,7 +115,7 @@ def Main():
                     error_message.append("No Desired Item")
                 elif "sk-" not in key:
                     error_message.append("Invalid API Key")
-                elif(error_message == []):
+                elif(len(error_message) == 0):
                     # Generate the email
                     result = llm_response(CompanyName, DesiredItem, URL_Text)
                     st.write(result)    
