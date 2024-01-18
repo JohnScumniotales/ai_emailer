@@ -105,9 +105,7 @@ def Main():
                 
                 # Error Handling
                 error_message = []
-                if len(URL) == 0:
-                    error_message.append("No URL Provided")
-                elif URL_Text is None or len(URL_Text) == 0: 
+                if URL_Text is None or len(URL_Text) == 0: 
                     error_message.append("Invalid URL")
                 elif len(CompanyName) == 0:
                     error_message.append("No Company Name")
