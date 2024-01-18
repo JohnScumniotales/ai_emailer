@@ -103,20 +103,23 @@ def Main():
                 URL_Text = get_URL_text(URL)
                 
                 # Error Handling
+                error_message = []
                 if len(URL) == 0:
-                    rerun("No URL Provided")
+                    error_message.append("No URL Provided")
                 elif URL_Text is None or len(URL_Text) == 0: 
-                    rerun("Invalid URL")
+                    error_message.append("Invalid URL")
                 elif len(CompanyName) == 0:
-                    rerun("No Company Name")
+                    error_message.append("No Company Name")
                 elif len(DesiredItem) == 0:
-                    rerun("No Desired Item")
+                    error_message.append("No Desired Item")
                 elif "sk-" not in key:
-                    rerun("Invalid API Key")
-                else:
+                    error_message.append("Invalid API Key")
+                elif(error_message == []):
                     # Generate the email
                     result = llm_response(CompanyName, DesiredItem, URL_Text)
                     st.write(result)    
                     st.session_state.email_counter += 1
+                else:
+                    rerun(error_message)
 Main()
 
