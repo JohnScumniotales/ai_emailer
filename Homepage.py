@@ -103,15 +103,17 @@ def Main():
                 st.write("Downloading Data")
                 URL_Text = get_URL_text(URL)
                 
-                # Error Handling
+               # Error Handling
                 error_message = []
-                if URL_Text is None or len(URL_Text) == 0: 
+                if len(URL) == 0:
+                    error_message.append("No URL Provided")
+                if URL_Text is None or len(URL_Text) == 0:
                     error_message.append("Invalid URL")
-                elif len(CompanyName) == 0:
+                if len(CompanyName) == 0:
                     error_message.append("No Company Name")
-                elif len(DesiredItem) == 0:
+                if len(DesiredItem) == 0:
                     error_message.append("No Desired Item")
-                elif "sk-" not in key:
+                if "sk-" not in key:
                     error_message.append("Invalid API Key")
                 
                 if len(error_message) == 0:
@@ -122,6 +124,5 @@ def Main():
                 else:
                     errorlist = ', '.join(error_message)
                     rerun(errorlist)
-
 Main()
 
