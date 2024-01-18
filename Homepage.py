@@ -61,7 +61,7 @@ def get_URL_text(URL):
         print(f"An error occurred: {error}")
 
 # Takes URL_Response, CompanyName, DesiredItem as a parameter and returns LLM response
-def llm_response(CompanyName, DesiredItem, URL_Text):
+def llm_response(CompanyName, DesiredItem, URL_Text, max_length):
     message = (
         SystemMessage(content=(f'''
         You are a program that creates emails to send to companies in order to seek out sponsorships.
@@ -69,14 +69,13 @@ def llm_response(CompanyName, DesiredItem, URL_Text):
         for context here is text from a website regarding the desired item: {URL_Text}.
         '''
         )),
-        HumanMessage(content=f"Create an email to {CompanyName} seeking a sponsorship including but not limited to a(n) {DesiredItem}")
+        HumanMessage(content=f"Create an email to {CompanyName} seeking a sponsorship including but not limited to a(n) {DesiredItem} please limit your response to {max_length} words")
     )
     res = chat(message)
     return res.content
 
 # Function takes error message as input, counts-down and restarts site
 def rerun(error):
-    
     st.warning(error, icon="⚠️")
     for i in range(5, -1, -1):
         st.text(f"Restarting in {i}")
@@ -94,7 +93,8 @@ def Main():
     CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.button_disabled)
     DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.button_disabled)
     URL = st.text_input("Enter URL:",disabled= st.session_state.button_disabled)
-    
+    max_length = st.slider("Max Word Count",disabled= st.session_state.button_disabled, min_value=100, max_value=2500, value=500)
+
     #If button hasnt been clicked
     if st.session_state.button_clicked == False:
         #Starts Email Creation & toggles button functionality
@@ -103,7 +103,7 @@ def Main():
                 st.write("Downloading Data")
                 URL_Text = get_URL_text(URL)
                 
-               # Error Handling
+                # Error Handling
                 error_message = []
                 if len(URL) == 0:
                     error_message.append("No URL Provided")
@@ -118,7 +118,7 @@ def Main():
                 
                 if len(error_message) == 0:
                     # Generate the email
-                    result = llm_response(CompanyName, DesiredItem, URL_Text)
+                    result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
                     st.write(result)
                     st.session_state.email_counter += 1
                 else:
