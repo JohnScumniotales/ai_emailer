@@ -86,7 +86,7 @@ def rerun(error):
     for i in range(5, -1, -1):
         st.text(f"Restarting in {i}")
         time.sleep(1)
-    toggle_button_on_click()
+    reset_session_state()
     st.rerun()
 
 def Main():
