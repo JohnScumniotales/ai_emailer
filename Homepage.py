@@ -95,6 +95,10 @@ def Main():
     URL = st.text_input("Enter URL:",disabled= st.session_state.button_disabled)
     max_length = st.slider("Max Word Count",disabled= st.session_state.button_disabled, min_value=100, max_value=2500, value=500)
 
+    if len(CompanyName) == 0 and len(DesiredItem) == 0 and len(URL) == 0:
+        st.session_state.button_disabled = True
+    else:
+        st.session_state.button_disabled = False
     #If button hasnt been clicked
     if st.session_state.button_clicked == False:
         #Starts Email Creation & toggles button functionality
