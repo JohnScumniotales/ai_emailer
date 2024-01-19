@@ -99,7 +99,7 @@ def Main():
     CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
     DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.field_disabled)
     URL = st.text_input("Enter URL:",disabled= st.session_state.field_disabled)
-    max_length = st.slider("Max Word Count",disabled= st.session_state.button_disabled, min_value=100, max_value=2500, value=500)
+    max_length = st.slider("Max Word Count",disabled= st.session_state.field_disabled, min_value=100, max_value=2500, value=500)
 
     if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
         #If button hasnt been clicked
