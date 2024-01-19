@@ -103,8 +103,8 @@ def Main():
 
     if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
         #If button hasnt been clicked
-        st.session_state.button_disabled = False
         if st.session_state.button_clicked == False:
+            st.session_state.button_disabled = False
             #Starts Email Creation & toggles button functionality
             if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
                 with st.status("Generating Email", expanded=True):
