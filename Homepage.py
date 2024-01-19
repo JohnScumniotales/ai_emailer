@@ -97,36 +97,38 @@ def Main():
 
     if len(CompanyName) == 0 and len(DesiredItem) == 0 and len(URL) == 0:
         st.session_state.button_disabled = True
+         #If button hasnt been clicked
+        if st.session_state.button_clicked == False:
+            #Starts Email Creation & toggles button functionality
+            if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
+                with st.status("Generating Email", expanded=True):
+                    st.write("Downloading Data")
+                    URL_Text = get_URL_text(URL)
+                    
+                    # Error Handling
+                    error_message = []
+                    if len(URL) == 0:
+                        error_message.append("No URL Provided")
+                    if URL_Text is None or len(URL_Text) == 0:
+                        error_message.append("Invalid URL")
+                    if len(CompanyName) == 0:
+                        error_message.append("No Company Name")
+                    if len(DesiredItem) == 0:
+                        error_message.append("No Desired Item")
+                    if "sk-" not in key:
+                        error_message.append("Invalid API Key")
+                    
+                    if len(error_message) == 0:
+                        # Generate the email
+                        result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
+                        st.write(result)
+                        st.session_state.email_counter += 1
+                    else:
+                        errorlist = ', '.join(error_message)
+                        rerun(errorlist)
     else:
         st.session_state.button_disabled = False
-    #If button hasnt been clicked
-    if st.session_state.button_clicked == False:
-        #Starts Email Creation & toggles button functionality
-        if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
-            with st.status("Generating Email", expanded=True):
-                st.write("Downloading Data")
-                URL_Text = get_URL_text(URL)
-                
-                # Error Handling
-                error_message = []
-                if len(URL) == 0:
-                    error_message.append("No URL Provided")
-                if URL_Text is None or len(URL_Text) == 0:
-                    error_message.append("Invalid URL")
-                if len(CompanyName) == 0:
-                    error_message.append("No Company Name")
-                if len(DesiredItem) == 0:
-                    error_message.append("No Desired Item")
-                if "sk-" not in key:
-                    error_message.append("Invalid API Key")
-                
-                if len(error_message) == 0:
-                    # Generate the email
-                    result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
-                    st.write(result)
-                    st.session_state.email_counter += 1
-                else:
-                    errorlist = ', '.join(error_message)
-                    rerun(errorlist)
+
+   
 Main()
 
