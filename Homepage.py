@@ -38,7 +38,7 @@ def toggle_button_on_click():
 
 # Initialize the button_disabled session state variable
 if 'button_disabled' not in st.session_state:
-    st.session_state.button_disabled = True
+    st.session_state.button_disabled = False
 
 # Initialize session state variables
 if 'button_clicked' not in st.session_state:
