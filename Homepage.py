@@ -26,34 +26,23 @@ chat = ChatOpenAI(
 # Function to reset session state
 def reset_session_state():
     st.session_state.button_clicked = False
-    st.session_state.fieldsFull = False
-    st.session_state.field_disabled = False
-    st.session_state.button_disabled = True
 
 #Changes button session state 
 def toggle_button_on_click():
     # Toggle the disabled state of the button
     st.session_state.button_disabled = not st.session_state.button_disabled
 
-# Initialize session state variables
+# Initialize the button_disabled session state variable
 if 'button_disabled' not in st.session_state:
     st.session_state.button_disabled = False
 
 # Initialize session state variables
-if 'button_disabled' not in st.session_state:
-    st.session_state.button_disabled = True
+if 'button_clicked' not in st.session_state:
+    st.session_state.button_clicked = False
 
-# Initialize session state variables
-if 'fieldsFull' not in st.session_state:
-    st.session_state.fieldsFull = False
-
-# Initialize session state variables
+# Initialize email_counter in session state
 if 'email_counter' not in st.session_state:
     st.session_state.email_counter = 0
-
-# Initialize session state variables
-if 'field_disabled' not in st.session_state:
-    st.session_state.field_disabled = False
 
 # Takes URL as a parameter and returns text if possible
 def get_URL_text(URL):
@@ -101,17 +90,12 @@ def Main():
     st.text(f"Total Emails Generated: {st.session_state.email_counter}")
     
     # Collect user Input
-    CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
-    DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.field_disabled)
-    URL = st.text_input("Enter URL:",disabled= st.session_state.field_disabled)
+    CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.button_disabled)
+    DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.button_disabled)
+    URL = st.text_input("Enter URL:",disabled= st.session_state.button_disabled)
     max_length = st.slider("Max Word Count",disabled= st.session_state.button_disabled, min_value=100, max_value=2500, value=500)
-    
-    if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
-        st.session_state.button_disabled = False
-        #If button hasnt been clicked
-    else:
-        st.session_state.button_disabled = True
 
+    #If button hasnt been clicked
     if st.session_state.button_clicked == False:
         #Starts Email Creation & toggles button functionality
         if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
@@ -121,9 +105,16 @@ def Main():
                 
                 # Error Handling
                 error_message = []
+                if len(URL) == 0:
+                    error_message.append("No URL Provided")
                 if URL_Text is None or len(URL_Text) == 0:
                     error_message.append("Invalid URL")
-                
+                if len(CompanyName) == 0:
+                    error_message.append("No Company Name")
+                if len(DesiredItem) == 0:
+                    error_message.append("No Desired Item")
+                if "sk-" not in key:
+                    error_message.append("Invalid API Key")
                 
                 if len(error_message) == 0:
                     # Generate the email
