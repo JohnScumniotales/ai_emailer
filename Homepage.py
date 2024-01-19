@@ -26,11 +26,15 @@ chat = ChatOpenAI(
 # Function to reset session state
 def reset_session_state():
     st.session_state.button_clicked = False
+    st.session_state.field_disabled = False
 
 #Changes button session state 
 def toggle_button_on_click():
     # Toggle the disabled state of the button
     st.session_state.button_disabled = not st.session_state.button_disabled
+    #Disable Input Fields
+    st.session_state.field_disabled = True
+
 
 # Initialize the button_disabled session state variable
 if 'button_disabled' not in st.session_state:
@@ -44,6 +48,8 @@ if 'button_clicked' not in st.session_state:
 if 'email_counter' not in st.session_state:
     st.session_state.email_counter = 0
 
+if 'field_disabled' not in st.session_state:
+    st.session_state.field_disabled = False
 # Takes URL as a parameter and returns text if possible
 def get_URL_text(URL):
     try:
@@ -97,7 +103,10 @@ def Main():
 
     if len(CompanyName) == 0 and len(DesiredItem) == 0 and len(URL) == 0:
         st.session_state.button_disabled = True
-         #If button hasnt been clicked
+        
+    else:
+        st.session_state.button_disabled = False
+        #If button hasnt been clicked
         if st.session_state.button_clicked == False:
             #Starts Email Creation & toggles button functionality
             if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
@@ -126,8 +135,6 @@ def Main():
                     else:
                         errorlist = ', '.join(error_message)
                         rerun(errorlist)
-    else:
-        st.session_state.button_disabled = False
 
    
 Main()
