@@ -157,7 +157,7 @@ def Main():
         """
         )
         st.write("")
-        st.session_state.temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0, max_value=1, value=0.5)
+        st.session_state.temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
 
 Main()
 
