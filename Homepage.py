@@ -164,7 +164,7 @@ def Main():
             and response generation. 
         """
         )
-        st.session_state.LLMmodel = st.text_input(value= "gpt-3.5-turbo", disabled= True)
+        st.session_state.LLMmodel = st.text_input(None, "gpt-3.5-turbo", disabled= True)
 
         st.write("")
         st.write("")
