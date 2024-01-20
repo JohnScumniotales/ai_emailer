@@ -167,7 +167,7 @@ def Main():
         """
         )
         #Shows Model
-        st.session_state.temp = st.text_input(value= 'gpt-3.5-turbo', disabled= True)
+        st.session_state.temp = st.text_input('','gpt-3.5-turbo', disabled= True)
 
         st.write("")
         st.write("")
@@ -175,11 +175,11 @@ def Main():
         st.subheader("LLM Temperature 🌡️")
         st.markdown(
             """
-            In a Language Model like GPT-3.5, temperature is a crucial setting that controls the
-            randomness of text generation. Higher values (e.g., 0.8) produce diverse and creative
-            outputs, while lower values (e.g., 0.2) result in more focused and deterministic 
-            responses. Adjusting the temperature allows control of the balance, coherence and novelty 
-            in the generated content, tailoring it to the desired preferences or applicational needs.
+            In a Language Model like GPT-3.5, temperature is a crucial setting that controls the  
+            randomness of text generation. Higher values (e.g., 0.8) produce diverse and creative  
+            outputs, while lower values (e.g., 0.2) result in more focused and deterministic  
+            responses. Adjusting the temperature allows control of the balance, coherence and novelty  
+            in the generated content, tailoring it to the desired preferences or applicational needs.  
         """
         )
         st.write("")
