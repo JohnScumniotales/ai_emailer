@@ -16,10 +16,15 @@ st.set_page_config(
 
 global key
 key = "Your Open Ai Key"
+global temp
+
+#intialize temp
+if 'temp' not in st.session_state:
+    st.session_state.temp = 0.5
 
 chat = ChatOpenAI(
     openai_api_key=key,
-    temperature=0.5,
+    temperature=st.session_state.temp,
     model='gpt-3.5-turbo'
 )
 
@@ -93,38 +98,66 @@ def rerun(error):
 def Main():
     st.image('gfr.png')
     #Streamlit UI Title
-    st.title("Sponsor Email Generator")
-    st.text(f"Total Emails Generated: {st.session_state.email_counter}")
+    st.title("🤖 Sponsor Email Tool")
+    tabMain, tabInfo, tabSettings = st.tabs(["Main","Info", "Settings"])
     
-    # Collect user Input
-    CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
-    DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.field_disabled)
-    URL = st.text_input("Enter URL:",disabled= st.session_state.field_disabled)
-    max_length = st.slider("Max Word Count",disabled= st.session_state.field_disabled, min_value=100, max_value=2500, value=500)
+    with tabMain:
+        st.write(
+            "This tool utlilizes GPT 3.5 to generate emails for potential sponsors" 
+        )
 
-    if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
-        #If button hasnt been clicked
-        if st.session_state.button_clicked == False:
-            #Starts Email Creation & toggles button functionality
-            if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
-                with st.status("Generating Email", expanded=True):
-                    st.write("Downloading Data")
-                    URL_Text = get_URL_text(URL)
-                    
-                    # Error Handling
-                    error_message = []
-                    if URL_Text is None or len(URL_Text) == 0:
-                        error_message.append("Invalid URL")
-                    if "sk-" not in key:
-                        error_message.append("Invalid API Key")
-                    
-                    if len(error_message) == 0:
-                        # Generate the email
-                        result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
-                        st.write(result)
-                        st.session_state.email_counter += 1
-                    else:
-                        errorlist = ', '.join(error_message)
-                        rerun(errorlist)
+        st.text(f"Total Emails Generated: {st.session_state.email_counter}")
+        
+        # Collect user Input
+        CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
+        DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.field_disabled)
+        URL = st.text_input("Enter URL:",disabled= st.session_state.field_disabled)
+        max_length = st.slider("Max Word Count",disabled= st.session_state.field_disabled, min_value=100, max_value=2500, value=500)
+
+        if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
+            #If button hasnt been clicked
+            if st.session_state.button_clicked == False:
+                #Starts Email Creation & toggles button functionality
+                if st.button("Create Email",on_click=toggle_button_on_click,disabled= st.session_state.button_disabled):
+                    with st.status("Generating Email", expanded=True):
+                        st.write("Downloading Data")
+                        URL_Text = get_URL_text(URL)
+                        
+                        # Error Handling
+                        error_message = []
+                        if URL_Text is None or len(URL_Text) == 0:
+                            error_message.append("Invalid URL")
+                        if "sk-" not in key:
+                            error_message.append("Invalid API Key")
+                        
+                        if len(error_message) == 0:
+                            # Generate the email
+                            result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
+                            st.write(result)
+                            st.session_state.email_counter += 1
+                        else:
+                            errorlist = ', '.join(error_message)
+                            rerun(errorlist)
+    with tabInfo:
+        st.write("")
+        st.write("")
+
+    with tabSettings:
+        st.write("")
+        st.write("")
+
+        st.subheader("LLM Temperature")
+        st.markdown(
+            """
+            In a Language Model like GPT-3.5, temperature is a crucial setting that controls the
+            randomness of text generation. Higher values (e.g., 0.8) produce diverse and creative
+            outputs, while lower values (e.g., 0.2) result in more focused and deterministic 
+            responses. Adjusting the temperature allows control of the balance, coherence and novelty 
+            in the generated content, tailoring it to the desired preferences or applicational needs.
+        """
+        )
+        st.write("")
+        st.session_state.temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0, max_value=1, value=0.5)
+
 Main()
 
