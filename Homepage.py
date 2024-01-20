@@ -167,7 +167,7 @@ def Main():
         """
         )
         #Shows Model
-        st.text_input('', 'gpt-3.5-turbo', disabled= True)
+        st.session_state.temp = st.text_input(value= 'gpt-3.5-turbo', disabled= True)
 
         st.write("")
         st.write("")
@@ -183,7 +183,7 @@ def Main():
         """
         )
         st.write("")
-        st.session_state.temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
+        st.session_state.temp = st.slider("Temperature (Default: 0.5)",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
         
 Main()
 
