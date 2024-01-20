@@ -26,7 +26,7 @@ chat = ChatOpenAI(
 # Function to reset session state
 def reset_session_state():
     st.session_state.button_clicked = False
-    st.session_state.field_disabled = False
+    toggle_button_on_click()
 
 #Changes button session state 
 def toggle_button_on_click():
@@ -112,14 +112,8 @@ def Main():
                     
                     # Error Handling
                     error_message = []
-                    if len(URL) == 0:
-                        error_message.append("No URL Provided")
                     if URL_Text is None or len(URL_Text) == 0:
                         error_message.append("Invalid URL")
-                    if len(CompanyName) == 0:
-                        error_message.append("No Company Name")
-                    if len(DesiredItem) == 0:
-                        error_message.append("No Desired Item")
                     if "sk-" not in key:
                         error_message.append("Invalid API Key")
                     
@@ -131,6 +125,5 @@ def Main():
                     else:
                         errorlist = ', '.join(error_message)
                         rerun(errorlist)
-        
 Main()
 
