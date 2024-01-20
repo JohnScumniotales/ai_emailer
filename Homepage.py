@@ -16,16 +16,18 @@ st.set_page_config(
 
 global key
 key = "Your Open Ai Key"
-global temp
 
 #intialize temp
 if 'temp' not in st.session_state:
     st.session_state.temp = 0.5
 
+if 'LLMmodel' not in st.session_state:
+    st.session_state.LLMmodel = 'gpt-3.5-turbo'
+
 chat = ChatOpenAI(
     openai_api_key=key,
     temperature=st.session_state.temp,
-    model='gpt-3.5-turbo'
+    model=st.session_state.LLMmodel
 )
 
 # Function to reset session state
@@ -97,11 +99,18 @@ def rerun(error):
 
 def Main():
     st.image('gfr.png')
-    #Streamlit UI Title
+
+    st.write("")
+    st.write("")
+
     st.title("Sponsor Email Tool")
     tabMain, tabInfo, tabSettings = st.tabs(["Main","Info", "Settings"])
     
     with tabMain:
+        
+        st.write("")
+        st.write("")
+
         st.write(
             "This tool utlilizes GPT 3.5 to generate emails for potential sponsors" 
         )
@@ -146,7 +155,21 @@ def Main():
         st.write("")
         st.write("")
 
-        st.subheader("LLM Temperature🌡️")
+        st.subheader("Models 🤖")
+        st.markdown(
+            """
+            ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion 
+            parameters, ChatGPT 3.5 excels in generating human-like text with remarkable
+            coherence, while ChatGPT 4 takes it a step further, refining language understanding 
+            and response generation. 
+        """
+        )
+        st.session_state.LLMmodel = st.text_input("gpt-3.5-turbo",disabled= True, value= "")
+
+        st.write("")
+        st.write("")
+
+        st.subheader("LLM Temperature 🌡️")
         st.markdown(
             """
             In a Language Model like GPT-3.5, temperature is a crucial setting that controls the
