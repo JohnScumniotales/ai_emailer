@@ -88,7 +88,7 @@ def rerun(error):
         st.text(f"Restarting in {i}")
         time.sleep(1)
     reset_session_state()
-    st.rerun
+    st.rerun()
 
 def Main():
     st.image('gfr.png')
