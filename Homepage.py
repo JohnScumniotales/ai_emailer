@@ -164,7 +164,7 @@ def Main():
             and response generation. 
         """
         )
-        st.session_state.LLMmodel = st.text_input(None, "gpt-3.5-turbo", disabled= True)
+        st.text_input(label=None, value="gpt-3.5-turbo", disabled= True)
 
         st.write("")
         st.write("")
@@ -180,7 +180,7 @@ def Main():
         """
         )
         st.write("")
-        Temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
-        st.session_state.temp = Temp
+        st.session_state.temp = st.slider("Temperature",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
+        
 Main()
 
