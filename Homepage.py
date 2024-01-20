@@ -26,14 +26,15 @@ chat = ChatOpenAI(
 # Function to reset session state
 def reset_session_state():
     st.session_state.button_clicked = False
-    toggle_button_on_click()
+    st.session_state.field_disabled = False
+    st.session_state.field_disabled = False
 
 #Changes button session state 
 def toggle_button_on_click():
     # Toggle the disabled state of the button
     st.session_state.button_disabled = not st.session_state.button_disabled
     #Disable Input Fields
-    st.session_state.field_disabled = True
+    st.session_state.field_disabled = not st.session_state.field_disabled
 
 
 # Initialize the button_disabled session state variable
