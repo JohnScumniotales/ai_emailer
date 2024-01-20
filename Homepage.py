@@ -166,7 +166,7 @@ def Main():
             and response generation. 
         """
         )
-        st.text_input('test', 'gpt-3.5-turbo')
+        st.text_input(None, 'gpt-3.5-turbo')
 
         st.write("")
         st.write("")
