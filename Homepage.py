@@ -87,9 +87,7 @@ def rerun(error):
     for i in range(5, -1, -1):
         st.text(f"Restarting in {i}")
         time.sleep(1)
-    st.session_state.button_clicked = False
-    st.session_state.field_disabled = False
-    st.session_state.field_disabled = False
+    reset_session_state()
     st.rerun
 
 def Main():
