@@ -25,7 +25,6 @@ chat = ChatOpenAI(
 
 # Function to reset session state
 def reset_session_state():
-    st.session_state.button_clicked = False
     st.session_state.field_disabled = False
     st.session_state.field_disabled = False
 
