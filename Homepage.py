@@ -98,7 +98,7 @@ def rerun(error):
 def Main():
     st.image('gfr.png')
     #Streamlit UI Title
-    st.title("🤖 Sponsor Email Tool")
+    st.title("Sponsor Email Tool")
     tabMain, tabInfo, tabSettings = st.tabs(["Main","Info", "Settings"])
     
     with tabMain:
@@ -146,7 +146,7 @@ def Main():
         st.write("")
         st.write("")
 
-        st.subheader("LLM Temperature")
+        st.subheader("LLM Temperature🌡️")
         st.markdown(
             """
             In a Language Model like GPT-3.5, temperature is a crucial setting that controls the
