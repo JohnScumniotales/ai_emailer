@@ -17,6 +17,8 @@ st.set_page_config(
 global key
 key = "Your Open Ai Key"
 
+
+
 #intialize temp
 if 'temp' not in st.session_state:
     st.session_state.temp = 0.5
@@ -164,7 +166,7 @@ def Main():
             and response generation. 
         """
         )
-        st.text_input(value="gpt-3.5-turbo", disabled= True)
+        st.text_input('test', 'gpt-3.5-turbo')
 
         st.write("")
         st.write("")
