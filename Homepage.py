@@ -104,7 +104,7 @@ def Main():
     st.write("")
 
     st.title("Sponsor Email Tool")
-    tabMain, tabSettings = st.tabs(["Main","Info", "Settings"])
+    tabMain, tabSettings = st.tabs(["Main", "Settings"])
     
     with tabMain:
         
