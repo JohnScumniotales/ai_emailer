@@ -17,8 +17,6 @@ st.set_page_config(
 global key
 key = "Your Open Ai Key"
 
-
-
 #intialize temp
 if 'temp' not in st.session_state:
     st.session_state.temp = 0.5
@@ -45,7 +43,6 @@ def toggle_button_on_click():
     #Disable Input Fields
     st.session_state.field_disabled = not st.session_state.field_disabled
 
-
 # Initialize the button_disabled session state variable
 if 'button_disabled' not in st.session_state:
     st.session_state.button_disabled = False
@@ -60,6 +57,7 @@ if 'email_counter' not in st.session_state:
 
 if 'field_disabled' not in st.session_state:
     st.session_state.field_disabled = False
+
 # Takes URL as a parameter and returns text if possible
 def get_URL_text(URL):
     try:
@@ -90,7 +88,7 @@ def llm_response(CompanyName, DesiredItem, URL_Text, max_length):
     res = chat(message)
     return res.content
 
-# Function takes error message as input, counts-down and restarts site
+#Function takes error message as input, counts-down and restarts site
 def rerun(error):
     st.warning(error, icon="⚠️")
     for i in range(5, -1, -1):
@@ -106,7 +104,7 @@ def Main():
     st.write("")
 
     st.title("Sponsor Email Tool")
-    tabMain, tabInfo, tabSettings = st.tabs(["Main","Info", "Settings"])
+    tabMain, tabSettings = st.tabs(["Main","Info", "Settings"])
     
     with tabMain:
         
@@ -149,9 +147,6 @@ def Main():
                         else:
                             errorlist = ', '.join(error_message)
                             rerun(errorlist)
-    with tabInfo:
-        st.write("")
-        st.write("")
 
     with tabSettings:
         st.write("")
@@ -175,15 +170,13 @@ def Main():
         st.subheader("LLM Temperature 🌡️")
         st.markdown(
             """
-            In a Language Model like GPT-3.5, temperature is a crucial setting that controls the  
-            randomness of text generation. Higher values (e.g., 0.8) produce diverse and creative  
-            outputs, while lower values (e.g., 0.2) result in more focused and deterministic  
-            responses. Adjusting the temperature allows control of the balance, coherence and novelty  
-            in the generated content, tailoring it to the desired preferences or applicational needs.  
+            In a Language Model like GPT-3.5, temperature is a crucial setting that controls the randomness of text generation.  
+            Higher values (e.g., 0.8) produce diverse and creative outputs, while lower values (e.g., 0.2) result in more focused  
+            and deterministic responses. Adjusting the temperature allows control of the balance, coherence and novelty in the  
+            generated content, tailoring it to the desired preferences or applicational needs.  
         """
         )
         st.write("")
         st.session_state.temp = st.slider("Temperature (Default: 0.5)",disabled= st.session_state.field_disabled,min_value=0.0, max_value=1.0, value=0.5)
-        
-Main()
 
+Main()
