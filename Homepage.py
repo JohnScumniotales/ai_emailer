@@ -110,7 +110,7 @@ def Main():
         
         st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
 
-        st.metric(lable="Emails Created",value=st.session_state.email_counter)
+        st.metric(label="Emails Created",value=st.session_state.email_counter)
  
         st.write("")
         
