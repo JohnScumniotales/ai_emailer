@@ -109,8 +109,8 @@ def Main():
     
     with tabMain:
         
-        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
-        st.subheader("Created for Global Formula Racing (GFR)")
+        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.")
+        st.text("Created for Global Formula Racing (GFR)")
         
         st.write("")
 
