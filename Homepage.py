@@ -204,6 +204,8 @@ def Main():
         if whatKey == "Organization Key":
             st.session_state.key = st.text_input('',hideKey(st.session_state.key), disabled=True)
         else:
-            st.session_state.key = st.text_input('Your Key',disabled=st.session_state.field_disabled)
-
+            posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
+            if st.button('submit key',disabled=st.session_state.field_disabled):
+                st.session_state.key = posKey
+            
 Main()
