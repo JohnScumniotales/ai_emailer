@@ -108,9 +108,6 @@ def Main():
     
     with tabMain:
         
-        st.write("")
-        st.write("")
-
         st.subheader(
             """
             This tool utlilizes GPT 3.5 to generate emails for potential sponsors.  
