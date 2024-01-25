@@ -146,6 +146,7 @@ def Main():
         st.write("")
 
         st.subheader("Models 🤖",divider='red')
+        st.write("")
         st.markdown(
             """
             ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion  
@@ -159,6 +160,7 @@ def Main():
         st.write("")
 
         st.subheader("LLM Temperature 🌡️",divider='red')
+        st.write("")
         st.markdown(
             """
             In a Language Model like GPT-3.5, temperature is a crucial setting that controls the randomness of text generation.  
@@ -172,6 +174,7 @@ def Main():
         st.write("")
 
         st.subheader("API Key🗝️",divider='red')
+        st.write("")
         st.markdown(
             """
             An OpenAI API key is a secure passkey that enables developers to access and  
