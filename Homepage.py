@@ -58,7 +58,7 @@ if 'email_counter' not in st.session_state:
 if 'field_disabled' not in st.session_state:
     st.session_state.field_disabled = False
 
-# Takes URL as a parameter and returns text if possible
+# Takes URL and Scrapes website for text
 def get_URL_text(URL):
     try:
         response = requests.get(URL)
@@ -109,7 +109,8 @@ def Main():
     with tabMain:
         
         st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
-        
+        st.write("")
+
         # Collect user Input
         CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
         DesiredItem = st.text_input("Enter Desired Item:",disabled= st.session_state.field_disabled)
@@ -133,9 +134,8 @@ def Main():
                             error_message.append("Invalid API Key")
                         
                         if len(error_message) == 0:
-                            # Generate the email
-                            result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
-                            st.text_area(result)
+                            # Generate & display the email
+                            st.text_area(llm_response(CompanyName, DesiredItem, URL_Text, max_length))
                             st.session_state.email_counter += 1
                         else:
                             errorlist = ', '.join(error_message)
