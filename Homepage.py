@@ -110,9 +110,8 @@ def Main():
         
         st.write("")
         
-
-        st.markdown(
-            "The GFR Sponsor Email Tool utilizes GPT 3.5 to create quality emails to send to possible contributors"
+        st.subheader(
+            "This tool utlilizes GPT 3.5 to generate emails for potential sponsors. It was created for Global Formula Racing (GFR)"
         )
 
         st.text(f"Total Emails Generated: {st.session_state.email_counter}")
