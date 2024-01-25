@@ -104,12 +104,11 @@ def Main():
     st.write("")
 
     st.title("Sponsor Email Tool")
-    st.subheader("",divider='red')
     tabMain, tabSettings = st.tabs(["Main", "Settings"])
     
     with tabMain:
         
-        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.")
+        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",subheader='red')
         st.text("Created for Global Formula Racing (GFR)")
         
         st.write("")
@@ -153,7 +152,7 @@ def Main():
         st.write("")
         st.write("")
 
-        st.subheader("Models 🤖")
+        st.subheader("Models 🤖",subheader='red')
         st.markdown(
             """
             ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion  
@@ -168,7 +167,7 @@ def Main():
         st.write("")
         st.write("")
 
-        st.subheader("LLM Temperature 🌡️")
+        st.subheader("LLM Temperature 🌡️",subheader='red')
         st.markdown(
             """
             In a Language Model like GPT-3.5, temperature is a crucial setting that controls the randomness of text generation.  
@@ -183,7 +182,7 @@ def Main():
         st.write("")
         st.write("")
 
-        st.subheader("API Key🗝️")
+        st.subheader("API Key🗝️",subheader='red')
         st.markdown(
             """
             An OpenAI API key is a secure passkey that enables developers to access and  
