@@ -116,7 +116,7 @@ def Main():
 
 
     st.title("Sponsor Email Tool")
-    tabMain, tabSettings = st.tabs(["Main", "Settings"])
+    tabMain, tabSettings, tabInfo = st.tabs(["Main", "Settings", "Info"])
     
     with tabMain:
         
@@ -194,18 +194,50 @@ def Main():
             and submission of information with authorized control."""
             )
         
+            #API key selection
         whatKey = st.radio(
             "",
             ["Organization Key", "Custom Key"],
             disabled= st.session_state.field_disabled,
             horizontal=True,
             )
-        
+    
         if whatKey == "Organization Key":
             st.text_input('',hideKey(st.session_state.key), disabled=True)
         else:
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
                 st.session_state.key = posKey
+        
+    with tabInfo:
+        st.write("")
+        st.write("")
+
+        st.subheader("Company Name",divider='red')
+        st.markdown(
+            """
+            "Company Name" refers to the company in which we desire a contribution from. 
+        """
+        )
+
+        st.write("")
+        st.write("")
+
+        st.subheader("Desired Item", divider= 'red')
+        st.markdown(
+            """
+            "Desired Item" refers to the desired item in which we want from the Company.
+        """
+        )
+
+        st.write("")
+        st.write("")
+
+        st.subheader("URL", divider= 'red')
+        st.markdown(
+            """
+            "URL" refers to a link to a website that contains information relevant to both the Company and the Desired Item. The information from this website gives ChatGPT context in which to create a relevant email.
+        """
+        )
         
 Main()
