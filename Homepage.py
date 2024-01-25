@@ -14,7 +14,8 @@ st.set_page_config(
     layout="wide",
 )
 
-global key
+global orgKey
+orgKey = "Organization key here" 
 
 if 'key' not in st.session_state:
     st.session_state.key = "Your Open Ai Key"
@@ -204,6 +205,7 @@ def Main():
     
         if whatKey == "Organization Key":
             st.text_input('',hideKey(st.session_state.key), disabled=True)
+            st.session_state.key = orgKey
         else:
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
