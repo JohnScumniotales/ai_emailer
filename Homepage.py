@@ -147,13 +147,12 @@ def Main():
 
         st.subheader("Models 🤖",divider='red')
         st.write("")
-        st.text_area(
-            "ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion"
-            "parameters, ChatGPT 3.5 excels in generating human-like text with remarkable"  
-            "coherence, while ChatGPT 4 takes it a step further, refining language understanding"
-            "and response generation"
-            )
-        
+        st.markdown(
+            """
+            ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion  
+            parameters, ChatGPT 3.5 excels in generating human-like text with remarkable  
+            coherence, while ChatGPT 4 takes it a step further, refining language understanding  
+            and response generation.""")
         #Shows Model
         st.session_state.temp = st.text_input('','gpt-3.5-turbo', disabled= True)
 
@@ -161,8 +160,7 @@ def Main():
         st.write("")
 
         st.subheader("LLM Temperature 🌡️",divider='red')
-        st.write("")
-        st.text_area(
+        st.markdown(
             """
             In a Language Model like GPT-3.5, temperature is a crucial setting that controls the randomness of text generation.  
             Higher values (e.g., 0.8) produce diverse and creative outputs, while lower values (e.g., 0.2) result in more focused  
@@ -175,8 +173,7 @@ def Main():
         st.write("")
 
         st.subheader("API Key🗝️",divider='red')
-        st.write("")
-        st.text_area(
+        st.markdown(
             """
             An OpenAI API key is a secure passkey that enables developers to access and  
             integrate OpenAI's language models into their applications, allowing for the retrieval  
