@@ -142,7 +142,7 @@ def Main():
                         error_message = []
                         if URL_Text is None or len(URL_Text) == 0:
                             error_message.append("Invalid URL")
-                        if "sk-" not in key:
+                        if "sk-" not in st.session_state.key:
                             error_message.append("Invalid API Key")
                         
                         if len(error_message) == 0:
@@ -208,5 +208,4 @@ def Main():
             if st.button('submit key',disabled=st.session_state.field_disabled):
                 st.session_state.key = posKey
         
-        st.write(st.session_state.key)
 Main()
