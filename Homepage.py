@@ -114,7 +114,7 @@ def Main():
             "This tool utlilizes GPT 3.5 to generate emails for potential sponsors. It was created for Global Formula Racing (GFR)"
         )
 
-        st.text(f"Total Emails Generated: {st.session_state.email_counter}")
+        st.subheader(f"Total Emails Generated: {st.session_state.email_counter}")
         
         # Collect user Input
         CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
