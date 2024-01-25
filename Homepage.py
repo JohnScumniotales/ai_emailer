@@ -207,5 +207,6 @@ def Main():
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
                 st.session_state.key = posKey
-            
+        
+        st.write(st.sesstion_state.key)
 Main()
