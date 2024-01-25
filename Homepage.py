@@ -108,12 +108,9 @@ def Main():
     
     with tabMain:
         
-        st.subheader(
-            """
-            This tool utlilizes GPT 3.5 to generate emails for potential sponsors.  
-            It was created for Global Formula Racing (GFR).  
-        """
-        )
+        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.")
+        st.subheader("It was created for Global Formula Racing (GFR).")
+        
         st.write("")
 
         st.text(f"Emails Generated: {st.session_state.email_counter}")
