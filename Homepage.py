@@ -109,11 +109,14 @@ def Main():
     with tabMain:
         
         st.write("")
-        
-        st.subheader(
+        st.write("")
+
+        st.text(
             "This tool utlilizes GPT 3.5 to generate emails for potential sponsors. It was created for Global Formula Racing (GFR)"
         )
-
+        st.write("")
+        st.write("")
+        
         st.text(f"Emails Generated: {st.session_state.email_counter}")
         
         # Collect user Input
@@ -185,8 +188,8 @@ def Main():
         st.markdown(
             """
             An OpenAI API key is a secure passkey that enables developers to access and  
-            integrate OpenAI's language models into their applications, allowing for the retrieval 
-            and submission of information with authorized control.
+            integrate OpenAI's language models into their applications, allowing for the retrieval  
+            and submission of information with authorized control.  
         """
         )
 
