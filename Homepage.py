@@ -163,6 +163,22 @@ def Main():
                             rerun(errorlist)
 
     with tabSettings:
+        
+        st.write("")
+        st.write("")
+
+        st.subheader("Output Language",divider='red')
+        
+        #language selection
+        whatLang = st.radio(
+            "Desired language",
+            ["English","Deutsch"],
+            disabled=st.session_state.field_disabled,
+            horizontal=True,
+        )
+
+        st.session_state.language = whatLang
+        
         st.write("")
         st.write("")
 
@@ -212,28 +228,13 @@ def Main():
             )
     
         if whatKey == "Organization Key":
-            st.text_input('',hideKey(st.session_state.key), disabled=True)
+            st.texselection
             st.session_state.key = orgKey
         else:
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
                 st.session_state.key = posKey
-        
-        st.write("")
-        st.write("")
 
-        st.subheader("Output Language",divider='red')
-
-        #language selection
-        whatLang = st.radio(
-            "Desired language",
-            ["English","Deutsch"],
-            disabled=st.session_state.field_disabled,
-            horizontal=True,
-        )
-
-        st.session_state.language = whatLang
-        
     with tabInfo:
         st.write("")
         st.write("")
