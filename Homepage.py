@@ -148,11 +148,12 @@ def Main():
         st.subheader("Models 🤖",divider='red')
         st.write("")
         st.text_area(
-            """
-            ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion  
-            parameters, ChatGPT 3.5 excels in generating human-like text with remarkable  
-            coherence, while ChatGPT 4 takes it a step further, refining language understanding  
-            and response generation.""")
+            "ChatGPT 3.5 and ChatGPT 4 are pinnacle models in conversational AI. With 175 billion"
+            "parameters, ChatGPT 3.5 excels in generating human-like text with remarkable"  
+            "coherence, while ChatGPT 4 takes it a step further, refining language understanding"
+            "and response generation"
+            )
+        
         #Shows Model
         st.session_state.temp = st.text_input('','gpt-3.5-turbo', disabled= True)
 
