@@ -101,7 +101,7 @@ def Main():
     st.image('gfr.png')
 
     st.write("")
-    st.write("")
+
 
     st.title("Sponsor Email Tool")
     tabMain, tabSettings = st.tabs(["Main", "Settings"])
@@ -109,10 +109,6 @@ def Main():
     with tabMain:
         
         st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
-
-        st.metric(label="Emails Created",value=st.session_state.email_counter)
- 
-        st.write("")
         
         # Collect user Input
         CompanyName = st.text_input("Enter Company Name:",disabled= st.session_state.field_disabled)
@@ -139,7 +135,7 @@ def Main():
                         if len(error_message) == 0:
                             # Generate the email
                             result = llm_response(CompanyName, DesiredItem, URL_Text, max_length)
-                            st.write(result)
+                            st.text_area(result)
                             st.session_state.email_counter += 1
                         else:
                             errorlist = ', '.join(error_message)
