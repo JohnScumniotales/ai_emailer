@@ -109,10 +109,10 @@ def Main():
     with tabMain:
         
         st.write("")
-        st.write("")
+        
 
-        st.write(
-            "This tool utlilizes GPT 3.5 to generate emails for potential sponsors" 
+        st.markdown(
+            "The GFR Sponsor Email Tool utilizes GPT 3.5 to create quality emails to send to possible contributors"
         )
 
         st.text(f"Total Emails Generated: {st.session_state.email_counter}")
