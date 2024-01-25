@@ -109,12 +109,9 @@ def Main():
     with tabMain:
         
         st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
-        st.text("Created for Global Formula Racing (GFR)")
-        
-        st.write("")
 
-        st.text(f"Emails Generated: {st.session_state.email_counter}")
-        
+        st.metric(lable="Emails Created",value=st.session_state.email_counter)
+ 
         st.write("")
         
         # Collect user Input
