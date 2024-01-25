@@ -3,6 +3,7 @@ import requests
 from langchain.chat_models import ChatOpenAI
 from bs4 import BeautifulSoup
 import streamlit as st
+from langchain.prompts import PromptTemplate
 
 from langchain.schema import (
     SystemMessage,
@@ -17,15 +18,21 @@ st.set_page_config(
 global orgKey
 orgKey = "Organization key here" 
 
+#Initialize key
 if 'key' not in st.session_state:
     st.session_state.key = "Your Open Ai Key"
 
-#intialize temp
+#Initialize temp
 if 'temp' not in st.session_state:
     st.session_state.temp = 0.5
 
+#Initialize LLMmodel
 if 'LLMmodel' not in st.session_state:
     st.session_state.LLMmodel = 'gpt-3.5-turbo'
+
+#Initialize langueage
+if 'language' not in st.session_state:
+    st.session_state.language = 'English'
 
 chat = ChatOpenAI(
     openai_api_key=st.session_state.key,
@@ -92,6 +99,7 @@ def llm_response(CompanyName, DesiredItem, URL_Text, max_length):
     message = (
         SystemMessage(content=(f'''
         You are a program that creates emails to send to companies in order to seek out sponsorships.
+        All of your responses should be in {st.session_state.language}
         for context here is a summary of the organization you represent: Global Formula Racing (GFR), in the Formula Student Competition since 2009, seeks support for designing competitive vehicles. Emphasizing simplicity, reliability, and practical experience, GFR competes globally, excelling in static and dynamic events. With a rich history, including transitioning to electric powertrains and embracing driverless development, GFR aims to shape developments in alternative propulsion and autonomous driving. The team values sponsors contributions in material, manufacturing, finance, and knowledge, offering various sponsorship packages. Sponsors become part of the Formula Student community, gaining visibility on the race car, livery, and website. The team welcomes sponsors to actively recruit and hire members, contributing to the growth of future engineers.
         for context here is text from a website regarding the desired item: {URL_Text}.
         '''
@@ -210,6 +218,21 @@ def Main():
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
                 st.session_state.key = posKey
+        
+        st.write("")
+        st.write("")
+
+        st.subheader("Output Language",divider='red')
+
+        #language selection
+        whatLang = st.radio(
+            "Desired language",
+            ["English","Deutsch"],
+            disabled=st.session_state.field_disabled,
+            horizontal=True,
+        )
+
+        st.session_state.language = whatLang
         
     with tabInfo:
         st.write("")
