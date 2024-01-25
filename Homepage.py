@@ -104,12 +104,13 @@ def Main():
     st.write("")
 
     st.title("Sponsor Email Tool")
+    st.subheader("",divider='red')
     tabMain, tabSettings = st.tabs(["Main", "Settings"])
     
     with tabMain:
         
-        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.")
-        st.subheader("It was created for Global Formula Racing (GFR).")
+        st.subheader("This tool utlilizes GPT 3.5 to generate emails for potential sponsors.",divider='red')
+        st.subheader("Created for Global Formula Racing (GFR)")
         
         st.write("")
 
