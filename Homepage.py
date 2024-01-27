@@ -216,7 +216,7 @@ def Main():
             st.session_state.key = orgKey
         else:
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
-            if st.button('submit key',disabled=st.session_state.field_disabled):
+            if st.button('submit key',disabled=st.session_state.field_disabled) and len(posKey) != 0:
                 st.session_state.key = posKey
         st.write(st.session_state.key)
         st.write("")
