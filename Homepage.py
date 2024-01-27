@@ -93,7 +93,7 @@ def countTokens(messages,model=st.session_state.LLMmodel):
     return numTKNS
 
 messages = "Hello OpenAI! I hope this message finds you well. I am excited to explore the capabilities of the OpenAI API. As a user, I am eager to harness the power of language models for various applications. Thank you for providing this incredible tool. Looking forward to creating amazing things together!"
-
+print("test")
 print(countTokens(messages))
 
 
