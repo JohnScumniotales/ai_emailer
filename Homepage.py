@@ -3,8 +3,7 @@ import requests
 from langchain.chat_models import ChatOpenAI
 from bs4 import BeautifulSoup
 import streamlit as st
-#from langchain.prompts import PromptTemplate
-import tiktoken
+from langchain.prompts import PromptTemplate
 
 from langchain.schema import (
     SystemMessage,
@@ -18,6 +17,51 @@ st.set_page_config(
 
 global orgKey
 orgKey = "Organization key here" 
+
+#Initialize key
+if 'key' not in st.session_state:
+    st.session_state.key = "Your Open Ai Key"
+
+#Initialize temp
+if 'temp' not in st.session_state:
+    st.session_state.temp = 0.5
+
+#Initialize LLMmodel
+if 'LLMmodel' not in st.session_state:
+    st.session_state.LLMmodel = 'gpt-3.5-turbo'
+
+#Initialize langueage
+if 'language' not in st.session_state:
+    st.session_state.language = 'English'
+
+chat = ChatOpenAI(
+    openai_api_key=st.session_state.key,
+    temperature=st.session_state.temp,
+    model=st.session_state.LLMmodel
+)
+
+#Hides API Key values from user
+def hideKey(key):
+    secKey = ''
+    for char in key:
+        if char != '-':
+            secKey += 'x'
+        else:
+            secKey += char
+    return secKey
+
+# Function to reset session state
+def reset_session_state():
+    st.session_state.button_clicked = False
+    st.session_state.field_disabled = False
+    st.session_state.button_disabled = False
+
+#Changes button session state 
+def toggle_button_on_click():
+    # Toggle the disabled state of the button
+    st.session_state.button_disabled = not st.session_state.button_disabled
+    #Disable Input Fields
+    st.session_state.field_disabled = not st.session_state.field_disabled
 
 # Initialize the button_disabled session state variable
 if 'button_disabled' not in st.session_state:
@@ -33,92 +77,6 @@ if 'email_counter' not in st.session_state:
 
 if 'field_disabled' not in st.session_state:
     st.session_state.field_disabled = False
-
-#Initialize key
-if 'key1' not in st.session_state:
-    st.session_state.key1 = "Your Open Ai Key"
-
-#Initialize temp
-if 'temp' not in st.session_state:
-    st.session_state.temp = 0.5
-
-#Initialize LLMmodel
-if 'LLMmodel' not in st.session_state:
-    st.session_state.LLMmodel = 'gpt-3.5-turbo'
-
-#Initialize langueage
-if 'language' not in st.session_state:
-    st.session_state.language = 'English'
-
-if 'SysMessage' not in st.session_state:
-    st.session_state.SysMessage = ""
-    
-chat = ChatOpenAI(
-    openai_api_key=st.session_state.key1,
-    temperature=st.session_state.temp,
-    model=st.session_state.LLMmodel
-)
-
-#Function untested!!! See: https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb
-#Takes string & model name and returns #of tokens in string
-def countTokens(messages,model=st.session_state.LLMmodel):
-    try:
-        encoding = tiktoken.encoding_for_model(model)
-    except KeyError:
-        st.warning("Model Not Found")
-        encoding = tiktoken.get_encoding("cl100k_base")
-    if model in  {
-        "gpt-3.5-turbo-0613",
-        "gpt-3.5-turbo-16k-0613",
-        "gpt-4-0314",
-        "gpt-4-32k-0314",
-        "gpt-4-0613",
-        "gpt-4-32k-0613",
-        }:
-        tkn_per_message = 3
-        tkn_per_name = 1
-    elif model == "gpt-3.5-turbo-0301":
-        tkn_per_message = 4
-        tkn_per_name = -1
-    else:
-        st.warning(f"countTokens() is not intended for {model}")
-    numTKNS = 0
-    for message in messages:
-        numTKNS += tkn_per_message
-        for key2, value in message.items():
-            numTKNS += len(encoding.encode(value))
-            if key2 == "name":
-                numTKNS += tkn_per_name
-    numTKNS += 3
-    return numTKNS
-
-messages = "Hello OpenAI! I hope this message finds you well. I am excited to explore the capabilities of the OpenAI API. As a user, I am eager to harness the power of language models for various applications. Thank you for providing this incredible tool. Looking forward to creating amazing things together!"
-print("test")
-print(countTokens(messages))
-
-
-# Function to reset session state
-def reset_session_state():
-    st.session_state.button_clicked = False
-    st.session_state.field_disabled = False
-    st.session_state.button_disabled = False
-
-#Changes button session state 
-def toggle_button_on_click():
-    # Toggle the disabled state of the button
-    st.session_state.button_disabled = not st.session_state.button_disabled
-    #Disable Input Fields
-    st.session_state.field_disabled = not st.session_state.field_disabled
-
-#Hides API Key values from user
-def hideKey(string):
-    secKey = ''
-    for char in string:
-        if char != '-':
-            secKey += 'x'
-        else:
-            secKey += char
-    return secKey
 
 # Takes URL and Scrapes website for text
 def get_URL_text(URL):
@@ -139,7 +97,13 @@ def get_URL_text(URL):
 # Takes URL_Response, CompanyName, DesiredItem as a parameter and returns LLM response
 def llm_response(CompanyName, DesiredItem, URL_Text, max_length):
     message = (
-        SystemMessage(content=st.session_state.SysMessage),
+        SystemMessage(content=(f'''
+        You are a program that creates emails to send to companies in order to seek out sponsorships.
+        All of your responses should be in {st.session_state.language}
+        for context here is a summary of the organization you represent: Global Formula Racing (GFR), in the Formula Student Competition since 2009, seeks support for designing competitive vehicles. Emphasizing simplicity, reliability, and practical experience, GFR competes globally, excelling in static and dynamic events. With a rich history, including transitioning to electric powertrains and embracing driverless development, GFR aims to shape developments in alternative propulsion and autonomous driving. The team values sponsors contributions in material, manufacturing, finance, and knowledge, offering various sponsorship packages. Sponsors become part of the Formula Student community, gaining visibility on the race car, livery, and website. The team welcomes sponsors to actively recruit and hire members, contributing to the growth of future engineers.
+        for context here is text from a website regarding the desired item: {URL_Text}.
+        '''
+        )),
         HumanMessage(content=f"Create an email to {CompanyName} seeking a sponsorship including but not limited to a(n) {DesiredItem} please limit your response to {max_length} words")
     )
     res = chat(message)
@@ -183,21 +147,11 @@ def Main():
                         st.write("Downloading Data")
                         URL_Text = get_URL_text(URL)
                         
-                        st.session_state.SysMessage = f'''You are a program that creates emails to send to companies in order to seek out sponsorships.
-                        All of your responses should be in {st.session_state.language}
-                        for context here is a summary of the organization you represent: Global Formula Racing (GFR), in the Formula Student Competition since 2009,
-                        seeks support for designing competitive vehicles. Emphasizing simplicity, reliability, and practical experience, GFR competes globally, excelling
-                        in static and dynamic events. With a rich history, including transitioning to electric powertrains and embracing driverless development, GFR aims
-                        to shape developments in alternative propulsion and autonomous driving. The team values sponsors contributions in material, manufacturing, finance,
-                        and knowledge, offering various sponsorship packages. Sponsors become part of the Formula Student community, gaining visibility on the race car,
-                        livery, and website. The team welcomes sponsors to actively recruit and hire members, contributing to the growth of future engineers.
-                        for context here is text from a website regarding the desired item: {URL_Text}.'''
-
                         # Error Handling
                         error_message = []
                         if URL_Text is None or len(URL_Text) == 0:
                             error_message.append("Invalid URL")
-                        if "sk-" not in st.session_state.key1:
+                        if "sk-" not in st.session_state.key:
                             error_message.append("Invalid API Key")
                         
                         if len(error_message) == 0:
@@ -258,12 +212,12 @@ def Main():
             )
     
         if whatKey == "Organization Key":
-            st.text_input("",hideKey(st.session_state.key1),disabled=True)
-            st.session_state.key1 = orgKey
+            st.text_input("",hideKey(st.session_state.key),disabled=True)
+            st.session_state.key = orgKey
         else:
             posKey = st.text_input('Your Key',disabled=st.session_state.field_disabled)
             if st.button('submit key',disabled=st.session_state.field_disabled):
-                st.session_state.key1 = posKey
+                st.session_state.key = posKey
         
         st.write("")
         st.write("")
@@ -311,4 +265,4 @@ def Main():
         """
         )
         
-#Main()
+Main()
