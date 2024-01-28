@@ -144,6 +144,10 @@ def Main():
         URL = st.text_input("Enter Relevant URL:", disabled=st.session_state.field_disabled)
         max_length = st.slider("Maximum Word Count", disabled=st.session_state.field_disabled, min_value=100, max_value=2500, value=500)
 
+        st.sidebar("Stuff")
+
+
+
         if len(CompanyName) != 0 and len(DesiredItem) != 0 and len(URL) != 0:
             # If the button hasn't been clicked
             if st.session_state.button_clicked == False:
@@ -166,7 +170,7 @@ def Main():
                         else:
                             errorlist = ', '.join(error_message)
                             rerun(errorlist)
-
+                        
     with tabSettings:
         st.write("")
         st.write("")
@@ -268,7 +272,4 @@ def Main():
             "URL" refers to a link to a website that contains information relevant to both the Company and the Desired Item. The information from this website gives ChatGPT context in which to create a relevant email.
         """
         )
-
-            
-
 Main()
