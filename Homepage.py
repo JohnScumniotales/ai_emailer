@@ -144,7 +144,7 @@ def Main():
         URL = st.text_input("Enter Relevant URL:", disabled=st.session_state.field_disabled)
         max_length = st.slider("Maximum Word Count", disabled=st.session_state.field_disabled, min_value=100, max_value=2500, value=500)
 
-        st.sidebar("Stuff")
+
 
 
 
