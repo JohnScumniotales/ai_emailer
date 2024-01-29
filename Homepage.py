@@ -133,8 +133,8 @@ def Main():
     st.title("Sponsor Email Tool")
     tabMain, tabSettings, tabInfo = st.tabs(["Main", "Settings", "Info", ])
     
-    repo_link = "https://github.com/JohnScumniotales/ai_emailer"
-    st.markdown(f"[GitHub Repo]({repo_link})", unsafe_allow_html=True)
+    #repo_link = "https://github.com/JohnScumniotales/ai_emailer"
+    #st.markdown(f"[GitHub Repo]({repo_link})", unsafe_allow_html=True)
 
     with tabMain:
         
