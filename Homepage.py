@@ -133,6 +133,9 @@ def Main():
     st.title("Sponsor Email Tool")
     tabMain, tabSettings, tabInfo = st.tabs(["Main", "Settings", "Info", ])
     
+    repo_link = "https://github.com/JohnScumniotales/ai_emailer"
+    st.markdown(f"[GitHub Repo]({repo_link})", unsafe_allow_html=True)
+
     with tabMain:
         
         st.subheader("This program utilizes GPT-3.5 to generate emails for potential contributors.", divider='red')
